@@ -1,18 +1,25 @@
+module Main where
 
 import Effects exposing (Never)
-import Counter exposing (init, update, view)
+import Four exposing (init, update, view, Action(..))
+import Four.Geometry exposing (hypercube)
+import Mouse
+import Window
 import StartApp
 import Task
 
-
 app =
   StartApp.start
-    { init = init
+    { init = init hypercube
     , update = update
     , view = view
-    , inputs = []
+    , inputs = [ mousePos ]
     }
 
+mousePos : Signal Action
+mousePos =
+  Signal.map Rotate <|
+  Signal.map2 (\x w -> toFloat x / toFloat w) Mouse.x Window.width
 
 main =
   app.html
