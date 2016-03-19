@@ -10,7 +10,7 @@ import Task
 
 app =
   StartApp.start
-    { init = init cell8
+    { init = init cell8Wireframe
     , update = update
     , view = view
     , inputs = [ mousePos ]
