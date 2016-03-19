@@ -10,7 +10,7 @@ import Task
 
 app =
   StartApp.start
-    { init = init cell120
+    { init = init cell8
     , update = update
     , view = view
     , inputs = [ mousePos ]

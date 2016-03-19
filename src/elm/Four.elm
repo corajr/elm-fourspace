@@ -21,7 +21,7 @@ type Action = Rotate Float
 
 init : Drawable Vertex -> (Model, Effects action)
 init mesh =
-  ({ mesh = mesh, angle3 = degrees 45, angle4 = degrees 45, viewport = (400, 400) }
+  ({ mesh = mesh, angle3 = degrees 45, angle4 = degrees 45, viewport = (640, 640) }
   , Effects.none)
 
 uniforms : Model -> Uniforms

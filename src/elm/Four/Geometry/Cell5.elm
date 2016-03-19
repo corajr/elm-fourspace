@@ -1,9 +1,9 @@
-module Four.Geometry.FiveCell where
+module Four.Geometry.Cell5 where
 
 import Math.Vector4 exposing (..)
 import Array
 
-fiveCellVertices = Array.fromList
+cell5Vertices = Array.fromList
   [ vec4 0.0 0.0 0.0 2.0
   , vec4 -1.11803 1.11803 1.11803 -0.5
   , vec4 1.11803 -1.11803 1.11803 -0.5
@@ -11,7 +11,7 @@ fiveCellVertices = Array.fromList
   , vec4 -1.11803 -1.11803 -1.11803 -0.5
   ]
 
-fiveCellEdges =
+cell5Edges =
   [ (2,3)
   , (3,4)
   , (4,2)
@@ -24,36 +24,26 @@ fiveCellEdges =
   , (0,1)
   ]
 
-fiveCellFaces =
+cell5Faces =
   [ (3,2,3)
-  , (2,3,4)
   , (3,4,3)
   , (3,1,3)
-  , (1,3,4)
   , (3,4,3)
   , (3,1,2)
-  , (1,2,4)
   , (2,4,3)
   , (3,1,2)
-  , (1,2,3)
   , (2,3,3)
   , (3,0,3)
-  , (0,3,4)
   , (3,4,3)
   , (3,0,2)
-  , (0,2,4)
   , (2,4,3)
   , (3,0,2)
-  , (0,2,3)
   , (2,3,3)
   , (3,0,1)
-  , (0,1,4)
   , (1,4,3)
   , (3,0,1)
-  , (0,1,3)
   , (1,3,3)
   , (3,0,1)
-  , (0,1,2)
   , (1,2,3)
   ]
 

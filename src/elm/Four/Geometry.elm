@@ -2,8 +2,8 @@ module Four.Geometry where
 
 import Four.Common exposing (..)
 import Four.Geometry.Index exposing (fromVerticesAndFaces, fromVerticesAndEdges)
-import Four.Geometry.FiveCell exposing (..)
-import Four.Geometry.EightCell exposing (..)
+import Four.Geometry.Cell5 exposing (..)
+import Four.Geometry.Cell8 exposing (..)
 import Four.Geometry.Cell16 exposing (..)
 import Four.Geometry.Cell24 exposing (..)
 import Four.Geometry.Cell120 exposing (..)
@@ -12,11 +12,11 @@ import Math.Vector3 exposing (..)
 import Math.Vector4 exposing (..)
 import WebGL exposing (..)
 
-fiveCell = fromVerticesAndFaces fiveCellVertices fiveCellFaces
-fiveCellWireframe = fromVerticesAndEdges fiveCellVertices fiveCellEdges
+cell5 = fromVerticesAndFaces cell5Vertices cell5Faces
+cell5Wireframe = fromVerticesAndEdges cell5Vertices cell5Edges
 
-eightCell = fromVerticesAndFaces eightCellVertices eightCellFaces
-eightCellWireframe = fromVerticesAndEdges eightCellVertices eightCellEdges
+cell8 = fromVerticesAndFaces cell8Vertices cell8Faces
+cell8Wireframe = fromVerticesAndEdges cell8Vertices cell8Edges
 
 cell16 = fromVerticesAndFaces cell16Vertices cell16Faces
 cell16Wireframe = fromVerticesAndEdges cell16Vertices cell16Edges
