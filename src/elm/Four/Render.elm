@@ -36,13 +36,16 @@ void main () {
 }
 |]
 
-
-fragmentShader : Shader {} { u | shade:Float } { vcolor:Vec3 }
+fragmentShader : Shader {} { u | near:Float, far:Float, opacity:Float } { vcolor:Vec3 }
 fragmentShader = [glsl|
 precision mediump float;
-uniform float shade;
+uniform float near;
+uniform float far;
+uniform float opacity;
 varying vec3 vcolor;
 void main () {
-    gl_FragColor = shade * vec4(vcolor, 1.0);
+    float depth = gl_FragCoord.z / gl_FragCoord.w;
+    float shade = 1.0 - smoothstep( near, far, depth );
+    gl_FragColor = vec4( vec3(shade), opacity);
 }
 |]

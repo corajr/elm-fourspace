@@ -37,16 +37,23 @@ uniforms model =
      , rotation = mul (makeRotate (3*t) (vec3 0 1 0)) (makeRotate (2*t) (vec3 1 0 0))
      , perspective = makePerspective 45 1 0.01 100
      , camera = makeLookAt (vec3 3 1 2) (vec3 0 0 0) (vec3 0 1 0)
-     , shade = 0.8
+     , near = 1.0
+     , far = 5.0
+     , opacity = 0.3
      }
 
 scene : Model -> List Renderable
 scene model =
   [ render vertexShader fragmentShader model.mesh (uniforms model) ]
 
+glConfig =
+  defaultConfiguration ++ [ Enable Blend
+                          , BlendFunc (SrcAlpha, OneMinusSrcAlpha)
+                          ]
+
 view address model =
   div []
-      [ fromElement <| webgl model.viewport (scene model)
+      [ fromElement <| webglWithConfig glConfig model.viewport (scene model)
       ]
 
 update action model =

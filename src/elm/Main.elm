@@ -2,7 +2,7 @@ module Main where
 
 import Effects exposing (Never)
 import Four exposing (init, update, view, Action(..))
-import Four.Geometry exposing (hypercube)
+import Four.Geometry exposing (..)
 import Mouse
 import Window
 import StartApp
@@ -10,7 +10,7 @@ import Task
 
 app =
   StartApp.start
-    { init = init hypercube
+    { init = init cell120
     , update = update
     , view = view
     , inputs = [ mousePos ]
