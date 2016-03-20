@@ -4,12 +4,12 @@ import ElmTest exposing (..)
 
 makeFourProjectionSuite : Test
 makeFourProjectionSuite =
-  suite "makeFourProjection"
-        [ test "" (assertEqual zero)
+  suite ""
+        [ test "" (assertEqual 0 0)
         ]
 
 all : Test
 all =
   suite "Four"
-         [ makeFourProjectionSuite
+         [ 
          ]
