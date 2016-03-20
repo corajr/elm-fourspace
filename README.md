@@ -7,6 +7,8 @@
 This library aims to provide a basic datatype and set of shaders for displaying
 four-dimensional geometry (such as tesseracts).
 
+The regular 4-D polytopes are the 5-, 8-, 16-, 24-, 120-, and 600-cell, available by pressing keys 1 through 6 in the [demo](http://corajr.github.io/elm-fourspace).
+
 ## Installation
 
 Make sure the following are installed:

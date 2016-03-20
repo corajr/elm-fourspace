@@ -2,6 +2,7 @@ module Four where
 
 import Effects exposing (Effects)
 import Four.Common exposing (..)
+import Four.Geometry exposing (..)
 import Four.Render exposing (makeFourTransform, vertexShader, fragmentShader)
 import Math.Vector3 exposing (..)
 import Math.Vector4 exposing (..)
@@ -11,17 +12,33 @@ import Debug exposing (log)
 import Html exposing (div, button, text, fromElement)
 
 type alias Model =
-  { mesh : Drawable Vertex
+  { mesh : Mesh
+  , wireframe : Bool
   , angle3 : Float
   , angle4 : Float
   , viewport : (Int, Int)
   }
 
-type Action = Rotate Float
+type Mesh = Cell5
+          | Cell8
+          | Cell16
+          | Cell24
+          | Cell120
+          | Cell600
+          | Custom (Drawable Vertex)
 
-init : Drawable Vertex -> (Model, Effects action)
+type Action = Rotate Float
+            | ToggleWireframe
+            | ChangeMesh Mesh
+            | NoOp
+
+init : Mesh -> (Model, Effects action)
 init mesh =
-  ({ mesh = mesh, angle3 = degrees 45, angle4 = degrees 45, viewport = (640, 640) }
+  ({ mesh = mesh
+   , wireframe = True
+   , angle3 = degrees 45
+   , angle4 = degrees 45
+   , viewport = (640, 640) }
   , Effects.none)
 
 uniforms : Model -> Uniforms
@@ -44,12 +61,32 @@ uniforms model =
 
 scene : Model -> List Renderable
 scene model =
-  [ render vertexShader fragmentShader model.mesh (uniforms model) ]
+  [ render vertexShader fragmentShader (getMesh model) (uniforms model) ]
 
 glConfig =
   defaultConfiguration ++ [ Enable Blend
                           , BlendFunc (SrcAlpha, OneMinusSrcAlpha)
                           ]
+
+getMesh model =
+  if model.wireframe then
+    case model.mesh of
+      Custom mesh -> mesh
+      Cell5 -> cell5Wireframe
+      Cell8 -> cell8Wireframe
+      Cell16 -> cell16Wireframe
+      Cell24 -> cell24Wireframe
+      Cell120 -> cell120Wireframe
+      Cell600 -> cell600Wireframe
+  else
+    case model.mesh of
+      Custom mesh -> mesh
+      Cell5 -> cell5
+      Cell8 -> cell8
+      Cell16 -> cell16
+      Cell24 -> cell24
+      Cell120 -> cell120
+      Cell600 -> cell600
 
 view address model =
   div []
@@ -58,6 +95,13 @@ view address model =
 
 update action model =
   case action of
+    NoOp -> (model, Effects.none)
     Rotate t ->
       let angle3 = pi * t
       in ({ model | angle3 = angle3 }, Effects.none)
+    ToggleWireframe ->
+      ({model | wireframe = not (model.wireframe)}, Effects.none)
+    ChangeMesh mesh ->
+      ({ model | mesh = mesh }, Effects.none)
+
+
