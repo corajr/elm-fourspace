@@ -3,6 +3,9 @@ Elm.Native.Four.make = function(elm) {
   elm.Native = elm.Native || {};
   elm.Native.Four = elm.Native.Four || {};
   if (elm.Native.Four.values) return elm.Native.Four.values;
+
+  var Utils = Elm.Native.Utils.make(elm);
+
   var MJS_FLOAT_ARRAY_TYPE = Float32Array;
 
   var Four = {};
@@ -31,8 +34,13 @@ Elm.Native.Four.make = function(elm) {
     return r;
   };
 
+  Four.toList = function toList(v) {
+    return Utils.list(v);
+  };
+
   return {
     cross4: F3(Four.cross4),
-    concatColumns: F4(Four.concatColumns)
+    concatColumns: F4(Four.concatColumns),
+    toList: Four.toList
   };
 };

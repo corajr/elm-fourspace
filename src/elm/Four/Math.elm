@@ -3,7 +3,7 @@ module Four.Math where
 
 # Operations
 
-@docs concatColumns, cross4
+@docs concatColumns, cross4, toList
 
 -}
 
@@ -18,3 +18,7 @@ concatColumns = Native.Four.concatColumns
 {-| Take the 4D cross product of three vectors. -}
 cross4 : Vec4 -> Vec4 -> Vec4 -> Vec4
 cross4 = Native.Four.cross4
+
+{-| Return the matrix elements as a List in row-major order -}
+toList : Mat4 -> List Float
+toList = Native.Four.toList
